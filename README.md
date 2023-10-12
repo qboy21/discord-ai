@@ -1,2 +1,2 @@
 # discord-ai
-FAQ devote
+FAQ development bot
