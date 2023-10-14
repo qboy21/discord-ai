@@ -209,9 +209,9 @@ def trigger_github_weekly_trending_repo_scrape():
     url = "https://api.browse.ai/v2/robots/0c0f94bf-207a-4660-8ade-238cd778bb25/tasks"
 
     payload = {"inputParameters": 
-               {"originUrl": "https://github.com/trending"}
+               {"originUrl": "https://github.com/hei2023/faq/blob/main/REDEMPTION%20UPDATE.pdf"}
             }
-    headers = {"Authorization": "Bearer ec2cc08b-3343-47c9-9dd3-dc5d40d4aa3b:dead067b-d485-496d-a3e0-4902339f6cfe"}
+    headers = {"Authorization": "Bearer 45a64b82-b413-449a-834d-5dcb77a09eea:2e1f963e-c248-441c-aa05-ddcefd281deb"}
 
     response = requests.request("POST", url, json=payload, headers=headers)
 
@@ -221,7 +221,7 @@ def trigger_github_weekly_trending_repo_scrape():
 def retrieve_github_weekly_trending_repo(task_id):
     url = f"https://api.browse.ai/v2/robots/0c0f94bf-207a-4660-8ade-238cd778bb25/tasks/{task_id}"
 
-    headers = {"Authorization": "Bearer ec2cc08b-3343-47c9-9dd3-dc5d40d4aa3b:dead067b-d485-496d-a3e0-4902339f6cfe"}
+    headers = {"Authorization": "Bearer 45a64b82-b413-449a-834d-5dcb77a09eea:2e1f963e-c248-441c-aa05-ddcefd281deb"}
 
     response = requests.request("GET", url, headers=headers)
 
