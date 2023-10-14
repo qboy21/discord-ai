@@ -206,7 +206,7 @@ def research(query):
 
 
 def trigger_github_weekly_trending_repo_scrape():
-    url = "https://api.browse.ai/v2/robots/0c0f94bf-207a-4660-8ade-238cd778bb25/tasks"
+    url = "https://api.browse.ai/v2/robots/72a7819a-8192-4f57-af6d-16620c6b2d44/tasks"
 
     payload = {"inputParameters": 
                {"originUrl": "https://github.com/hei2023/faq/blob/main/REDEMPTION%20UPDATE.pdf"}
