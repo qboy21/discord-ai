@@ -180,11 +180,11 @@ def research(query):
             func=knowledge_retrieval,
             description="Use this to get our internal knowledge base data for curated information, always use this first before searching online"
         ),      
-        Tool(
-            name = "Google_search",
-            func = search,
-            description = "Always use this to answer questions about current events, data, or terms that you don't really understand. You should ask targeted questions"
-        ),          
+        # Tool(
+        #     name = "Google_search",
+        #     func = search,
+        #     description = "Always use this to answer questions about current events, data, or terms that you don't really understand. You should ask targeted questions"
+        # ),          
         Tool(
             name = "Scrape_website",
             func = scrape_website,
