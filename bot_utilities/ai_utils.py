@@ -185,11 +185,11 @@ def research(query):
         #     func = search,
         #     description = "Always use this to answer questions about current events, data, or terms that you don't really understand. You should ask targeted questions"
         # ),          
-        Tool(
-            name = "Scrape_website",
-            func = scrape_website,
-            description = "Use this to load content from a website url"
-        ),   
+        # Tool(
+        #     name = "Scrape_website",
+        #     func = scrape_website,
+        #     description = "Use this to load content from a website url"
+        # ),   
     ]
 
     agent = initialize_agent(
@@ -310,11 +310,11 @@ def create_agent(id, user_name, ai_name, instructions):
             func = research,
             description = "Always use this to answer questions about current events, data, or terms that you don't really understand. You should ask targeted questions"
         ),           
-        Tool(
-            name = "Scrape_website",
-            func = scrape_website,
-            description = "Use this to load content from a website url"
-        ),   
+        # Tool(
+        #     name = "Scrape_website",
+        #     func = scrape_website,
+        #     description = "Use this to load content from a website url"
+        # ),   
     ]    
 
     agent = initialize_agent(
