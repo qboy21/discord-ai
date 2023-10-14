@@ -46,17 +46,14 @@ def sdxl(prompt):
 def knowledge_retrieval(query):    
     # Define the data to be sent in the request
     data = {
-        "params":{
-            "query":query
-        },
-        "project": "feda14180b9d-4ba2-9b3c-6c721dfe8f63"
-    }
+        "params":{"query":""},
+        "project":"b7d34292b8c4-48f9-8c57-b0fd6ee8996a"}
 
     # Convert Python object to JSON string
     data_json = json.dumps(data)
 
     # Send the POST request
-    response = requests.post("https://api-1e3042.stack.tryrelevance.com/latest/studios/6eba417b-f592-49fc-968d-6b63702995e3/trigger_limited", data=data_json)
+    response = requests.post("https://api-d7b62b.stack.tryrelevance.com/latest/studios/21f3471a-f695-485b-b3a0-20c8a2f830a4/trigger_limited", data=data_json)
     
     # Check the response status code
     if response.status_code == 200:
@@ -108,7 +105,7 @@ def scrape_website(url: str):
     data_json = json.dumps(data)
 
     # Send the POST request
-    response = requests.post("https://chrome.browserless.io/content?token=0a049e5b-3387-4c51-ab6c-57647d519571", headers=headers, data=data_json)
+    response = requests.post("https://chrome.browserless.io/content?token=58ea2ffd-9b24-40d4-9b79-27f7219aa8e3", headers=headers, data=data_json)
     
     # Check the response status code
     if response.status_code == 200:
