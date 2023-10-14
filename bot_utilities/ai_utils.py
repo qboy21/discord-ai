@@ -62,7 +62,7 @@ def knowledge_retrieval(query):
         print(f"HTTP request failed with status code {response.status_code}") 
 
 def summary(content):
-    llm = ChatOpenAI(temperature = 0, model = "gpt-3.5-turbo-16k-0613")
+    llm = ChatOpenAI(temperature = 0.2, model = "gpt-3.5-turbo-16k-0613")
     text_splitter = RecursiveCharacterTextSplitter(separators=["\n\n", "\n"], chunk_size = 10000, chunk_overlap=500)
     docs = text_splitter.create_documents([content])
     map_prompt = """
@@ -177,20 +177,20 @@ def research(query):
     llm_math_chain = LLMMathChain.from_llm(llm=llm, verbose=True)
     tools = [        
         Tool(
+            name = "Scrape_website",
+            func = scrape_website,
+            description = "Always use this to answer user questions load content from a website url"
+        ),   
+        Tool(
             name="Knowledge_retrieval",
             func=knowledge_retrieval,
-            description="Always use this to get our internal knowledge base data for curated information, always use this first before searching online"
+            description="Only use this to get our internal knowledge base data for curated information, always use this first before searching online"
         ),      
         Tool(
             name = "Google_search",
             func = search,
             description = "Do not use this to answer questions about current events, data, or terms that you don't really understand. You should ask targeted questions"
         ),          
-        Tool(
-            name = "Scrape_website",
-            func = scrape_website,
-            description = "Use this to load content from a website url"
-        ),   
     ]
 
     agent = initialize_agent(
@@ -309,7 +309,7 @@ def create_agent(id, user_name, ai_name, instructions):
         Tool(
             name = "research",
             func = research,
-            description = "Always use this to answer questions about from users, current events, data, or terms that you don't really understand. You should ask targeted questions"
+            description = "Always use this to answer questions about current events, data, or terms that you don't really understand. You should ask targeted questions"
         ),           
         Tool(
             name = "Scrape_website",
