@@ -158,7 +158,8 @@ def research(query):
             
             Please make sure you complete the objective above with the following rules:
             1/ You will always searching for internal knowledge base first to see if there are any relevant information
-            2/ If the internal knowledge doesnt have good result, then you can go search online
+            # 2/ If the internal knowledge doesnt have good result, then you can go search online
+            2/ Do not search online only use the relevance.io database
             3/ While search online:
                 a/ You will try to collect as many useful details as possible
                 b/ If there are url of relevant links & articles, you will scrape it to gather more information
@@ -178,18 +179,18 @@ def research(query):
         Tool(
             name="Knowledge_retrieval",
             func=knowledge_retrieval,
-            description="Use this to get our internal knowledge base data for curated information, always use this first before searching online"
+            description="Always use this to get our internal knowledge base data for curated information, always use this first before searching online"
         ),      
-        # Tool(
-        #     name = "Google_search",
-        #     func = search,
-        #     description = "Always use this to answer questions about current events, data, or terms that you don't really understand. You should ask targeted questions"
-        # ),          
-        # Tool(
-        #     name = "Scrape_website",
-        #     func = scrape_website,
-        #     description = "Use this to load content from a website url"
-        # ),   
+        Tool(
+            name = "Google_search",
+            func = search,
+            description = "Do not use this to answer questions about current events, data, or terms that you don't really understand. You should ask targeted questions"
+        ),          
+        Tool(
+            name = "Scrape_website",
+            func = scrape_website,
+            description = "Use this to load content from a website url"
+        ),   
     ]
 
     agent = initialize_agent(
@@ -308,13 +309,13 @@ def create_agent(id, user_name, ai_name, instructions):
         Tool(
             name = "research",
             func = research,
-            description = "Always use this to answer questions about current events, data, or terms that you don't really understand. You should ask targeted questions"
+            description = "Always use this to answer questions about from users, current events, data, or terms that you don't really understand. You should ask targeted questions"
         ),           
-        # Tool(
-        #     name = "Scrape_website",
-        #     func = scrape_website,
-        #     description = "Use this to load content from a website url"
-        # ),   
+        Tool(
+            name = "Scrape_website",
+            func = scrape_website,
+            description = "Use this to load content from a website url"
+        ),   
     ]    
 
     agent = initialize_agent(
