@@ -158,13 +158,12 @@ def research(query):
             
             Please make sure you complete the objective above with the following rules:
             1/ You will always searching for internal knowledge base first to see if there are any relevant information
-            # 2/ If the internal knowledge doesnt have good result, then you can go search online
-            2/ Do not search online use internal knowledge base only
-            # 3/ While search online:
-            #     a/ You will try to collect as many useful details as possible
-            #     b/ If there are url of relevant links & articles, you will scrape it to gather more information
-            #     c/ After scraping & search, you should think "is there any new things i should search & scraping based on the data I collected to increase research quality?" If answer is yes, continue; But don't do this more than 3 iteratins
-            # 4/ You should not make things up, you should only write facts & data that you have gathered
+            2/ If the internal knowledge doesnt have good result, then you can go search online
+            3/ While search online:
+                a/ You will try to collect as many useful details as possible
+                b/ If there are url of relevant links & articles, you will scrape it to gather more information
+                c/ After scraping & search, you should think "is there any new things i should search & scraping based on the data I collected to increase research quality?" If answer is yes, continue; But don't do this more than 3 iteratins
+            4/ You should not make things up, you should only write facts & data that you have gathered
             5/ In the final output, You should include all reference data & links to back up your research; You should include all reference data & links to back up your research
             6/ In the final output, You should include all reference data & links to back up your research; You should include all reference data & links to back up your research"""
     )
@@ -173,13 +172,13 @@ def research(query):
         "system_message": system_message,
     }
 
-    llm = ChatOpenAI(temperature=0, model="gpt-3.5-turbo-0613")
+    llm = ChatOpenAI(temperature=0.5, model="gpt-3.5-turbo-0613")
     llm_math_chain = LLMMathChain.from_llm(llm=llm, verbose=True)
     tools = [        
         Tool(
             name="Knowledge_retrieval",
             func=knowledge_retrieval,
-            description="Only use this to get our internal knowledge base data for curated information, always use this first before searching online"
+            description="Always use this to get our internal knowledge base data for curated information, always use this first before searching online"
         ),  
         
         Tool(
@@ -313,11 +312,11 @@ def create_agent(id, user_name, ai_name, instructions):
             func = research,
             description = "Only use this to answer user questions. You should ask targeted questions"
         ),           
-        # Tool(
-        #     name = "Scrape_website",
-        #     func = scrape_website,
-        #     description = "Only Use this to load content from a website url"
-        # ),   
+        Tool(
+            name = "Scrape_website",
+            func = scrape_website,
+            description = "Only Use this to load content from a website url"
+        ),   
     ]    
 
     agent = initialize_agent(
