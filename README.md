@@ -104,8 +104,8 @@
 
 
 
-# Discord AI Chatbot 🤖
-#### Your Discord AI Companion!
+Discord AI Chatbot 🤖
+Your Discord AI Companion!
 
 ![Image](https://cdn.discordapp.com/attachments/1119920576417513472/1127122563982688296/image.png)
 ![Image](https://cdn.discordapp.com/attachments/1119920576417513472/1127134209169969253/image.png)
@@ -116,7 +116,7 @@
   </a>
 </div>
 
-## Features and commands 🌟
+Features and commands 🌟
 
 </details>
 
@@ -153,7 +153,7 @@
 - [x] `/support`: Need Support?
 </details>
 
-## Additional configuration ⚙️
+Additional configuration ⚙️
 
 <details>
 <summary><strong>Enabling Internet access 🌐🔍(Click to Expand)</strong></summary>
