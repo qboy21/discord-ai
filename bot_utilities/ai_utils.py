@@ -181,11 +181,11 @@ def research(query):
             description="Always use this to get our internal knowledge base data for curated information, always use this first before searching online"
         ),  
         
-        Tool(
-            name = "Scrape_website",
-            func = scrape_website,
-            description = "Use this to answer user questions load content from a website url"
-        ),   
+        # Tool(
+        #     name = "Scrape_website",
+        #     func = scrape_website,
+        #     description = "Use this to answer user questions load content from a website url"
+        # ),   
     
         # Tool(
         #     name = "Google_search",
