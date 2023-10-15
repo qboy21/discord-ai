@@ -9,6 +9,91 @@
 # Goal
 - Provide a simply way for token holders to interact and receive responses for the token registration and redemption process
 
+# Result
+- AI agent delivers tailored responses in an easy accessible and efficient manner
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
