@@ -45,12 +45,12 @@ def sdxl(prompt):
 
 def knowledge_retrieval(query):    
     # Define the data to be sent in the request
-    data = {
-            "params":{
-                "query":query
-            },
-            "project": "b7d34292b8c4-48f9-8c57-b0fd6ee8996a"
-        }
+    data = {    
+        "params":{
+            "query":query
+        },
+        "project": "b7d34292b8c4-48f9-8c57-b0fd6ee8996a"
+    }
 
     # Convert Python object to JSON string
     data_json = json.dumps(data)
@@ -65,7 +65,7 @@ def knowledge_retrieval(query):
         print(f"HTTP request failed with status code {response.status_code}") 
 
 def summary(content):
-    llm = ChatOpenAI(temperature = 0.2, model = "gpt-3.5-turbo-16k-0613")
+    llm = ChatOpenAI(temperature = 0, model = "gpt-3.5-turbo-16k-0613")
     text_splitter = RecursiveCharacterTextSplitter(separators=["\n\n", "\n"], chunk_size = 10000, chunk_overlap=500)
     docs = text_splitter.create_documents([content])
     map_prompt = """
@@ -108,7 +108,7 @@ def scrape_website(url: str):
     data_json = json.dumps(data)
 
     # Send the POST request
-    response = requests.post("https://chrome.browserless.io/content?token=58ea2ffd-9b24-40d4-9b79-27f7219aa8e3", headers=headers, data=data_json)
+    response = requests.post("https://chrome.browserless.io/content?token=84b5237d-1c3f-4096-86d9-7ce6cd8fe1fc", headers=headers, data=data_json)
     
     # Check the response status code
     if response.status_code == 200:
@@ -160,9 +160,12 @@ def research(query):
             you do not make things up, you will try as hard as possible to gather facts & data to back up the research
             
             Please make sure you complete the objective above with the following rules:
-            1/ You will always begin searching for internal knowledge base first to see if there are any relevant information
-            2/ You only search using knowledge retrieval
-            3/ The internal knowledge contains most of the relevant information
+            1/ You will always searching for internal knowledge base first to see if there are any relevant information
+            2/ If the internal knowledge doesnt have good result, then you can go search online
+            3/ While search online:
+                a/ You will try to collect as many useful details as possible
+                b/ If there are url of relevant links & articles, you will scrape it to gather more information
+                c/ After scraping & search, you should think "is there any new things i should search & scraping based on the data I collected to increase research quality?" If answer is yes, continue; But don't do this more than 3 iteratins
             4/ You should not make things up, you should only write facts & data that you have gathered
             5/ In the final output, You should include all reference data & links to back up your research; You should include all reference data & links to back up your research
             6/ In the final output, You should include all reference data & links to back up your research; You should include all reference data & links to back up your research"""
@@ -178,20 +181,18 @@ def research(query):
         Tool(
             name="Knowledge_retrieval",
             func=knowledge_retrieval,
-            description="Always use this to get our internal knowledge base data for curated information, always use this first before searching online"
-        ),  
-        
-        Tool(
-            name = "Scrape_website",
-            func = scrape_website,
-            description = "Use this to answer user questions load content from a website url"
-        ),   
-    
+            description="Use this to get our internal knowledge base data for curated information, always use this first before searching online"
+        ),      
         Tool(
             name = "Google_search",
             func = search,
-            description = "Only use this to answer questions about current events, data, or terms that you don't really understand. You should ask targeted questions"
+            description = "Always use this to answer questions about current events, data, or terms that you don't really understand. You should ask targeted questions"
         ),          
+        Tool(
+            name = "Scrape_website",
+            func = scrape_website,
+            description = "Use this to load content from a website url"
+        ),   
     ]
 
     agent = initialize_agent(
@@ -208,12 +209,12 @@ def research(query):
 
 
 def trigger_github_weekly_trending_repo_scrape():
-    url = "https://api.browse.ai/v2/robots/72a7819a-8192-4f57-af6d-16620c6b2d44/tasks"
+    url = "https://api.browse.ai/v2/robots/0c0f94bf-207a-4660-8ade-238cd778bb25/tasks"
 
     payload = {"inputParameters": 
-               {"originUrl": "https://github.com/hei2023/faq/blob/main/REDEMPTION%20UPDATE.pdf"}
+               {"originUrl": "https://github.com/trending"}
             }
-    headers = {"Authorization": "Bearer 45a64b82-b413-449a-834d-5dcb77a09eea:2e1f963e-c248-441c-aa05-ddcefd281deb"}
+    headers = {"Authorization": "Bearer ec2cc08b-3343-47c9-9dd3-dc5d40d4aa3b:dead067b-d485-496d-a3e0-4902339f6cfe"}
 
     response = requests.request("POST", url, json=payload, headers=headers)
 
@@ -223,7 +224,7 @@ def trigger_github_weekly_trending_repo_scrape():
 def retrieve_github_weekly_trending_repo(task_id):
     url = f"https://api.browse.ai/v2/robots/0c0f94bf-207a-4660-8ade-238cd778bb25/tasks/{task_id}"
 
-    headers = {"Authorization": "Bearer 45a64b82-b413-449a-834d-5dcb77a09eea:2e1f963e-c248-441c-aa05-ddcefd281deb"}
+    headers = {"Authorization": "Bearer ec2cc08b-3343-47c9-9dd3-dc5d40d4aa3b:dead067b-d485-496d-a3e0-4902339f6cfe"}
 
     response = requests.request("GET", url, headers=headers)
 
@@ -310,13 +311,13 @@ def create_agent(id, user_name, ai_name, instructions):
         Tool(
             name = "research",
             func = research,
-            description = "Only use this to answer user questions. You should ask targeted questions"
+            description = "Always use this to answer questions about current events, data, or terms that you don't really understand. You should ask targeted questions"
         ),           
-        # Tool(
-        #     name = "Scrape_website",
-        #     func = scrape_website,
-        #     description = "Only Use this to load content from a website url"
-        # ),   
+        Tool(
+            name = "Scrape_website",
+            func = scrape_website,
+            description = "Use this to load content from a website url"
+        ),   
     ]    
 
     agent = initialize_agent(
