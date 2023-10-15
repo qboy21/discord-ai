@@ -46,6 +46,10 @@ TRIGGER:
   - redemption
   - process
   - redeem
+  - is
+  - does
+  - why
+  - 
 # Define the triggers that the bot should always respond to when in message
 
 DISABLE_PRESENCE: false
