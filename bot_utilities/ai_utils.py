@@ -46,8 +46,11 @@ def sdxl(prompt):
 def knowledge_retrieval(query):    
     # Define the data to be sent in the request
     data = {
-        "params":{"query":""},
-        "project":"b7d34292b8c4-48f9-8c57-b0fd6ee8996a"}
+            "params":{
+                "query":query
+            },
+            "project": "b7d34292b8c4-48f9-8c57-b0fd6ee8996a"
+        }
 
     # Convert Python object to JSON string
     data_json = json.dumps(data)
@@ -157,12 +160,9 @@ def research(query):
             you do not make things up, you will try as hard as possible to gather facts & data to back up the research
             
             Please make sure you complete the objective above with the following rules:
-            1/ You will always searching for internal knowledge base first to see if there are any relevant information
-            2/ If the internal knowledge doesnt have good result, then you can go search online
-            3/ While search online:
-                a/ You will try to collect as many useful details as possible
-                b/ If there are url of relevant links & articles, you will scrape it to gather more information
-                c/ After scraping & search, you should think "is there any new things i should search & scraping based on the data I collected to increase research quality?" If answer is yes, continue; But don't do this more than 3 iteratins
+            1/ You will always begin searching for internal knowledge base first to see if there are any relevant information
+            2/ You only search using knowledge retrieval
+            3/ The internal knowledge contains most of the relevant information
             4/ You should not make things up, you should only write facts & data that you have gathered
             5/ In the final output, You should include all reference data & links to back up your research; You should include all reference data & links to back up your research
             6/ In the final output, You should include all reference data & links to back up your research; You should include all reference data & links to back up your research"""
@@ -172,7 +172,7 @@ def research(query):
         "system_message": system_message,
     }
 
-    llm = ChatOpenAI(temperature=0.5, model="gpt-3.5-turbo-0613")
+    llm = ChatOpenAI(temperature=0, model="gpt-3.5-turbo-0613")
     llm_math_chain = LLMMathChain.from_llm(llm=llm, verbose=True)
     tools = [        
         Tool(
@@ -181,17 +181,17 @@ def research(query):
             description="Always use this to get our internal knowledge base data for curated information, always use this first before searching online"
         ),  
         
-        # Tool(
-        #     name = "Scrape_website",
-        #     func = scrape_website,
-        #     description = "Use this to answer user questions load content from a website url"
-        # ),   
+        Tool(
+            name = "Scrape_website",
+            func = scrape_website,
+            description = "Use this to answer user questions load content from a website url"
+        ),   
     
-        # Tool(
-        #     name = "Google_search",
-        #     func = search,
-        #     description = "Do not use this to answer questions about current events, data, or terms that you don't really understand. You should ask targeted questions"
-        # ),          
+        Tool(
+            name = "Google_search",
+            func = search,
+            description = "Only use this to answer questions about current events, data, or terms that you don't really understand. You should ask targeted questions"
+        ),          
     ]
 
     agent = initialize_agent(
@@ -312,11 +312,11 @@ def create_agent(id, user_name, ai_name, instructions):
             func = research,
             description = "Only use this to answer user questions. You should ask targeted questions"
         ),           
-        Tool(
-            name = "Scrape_website",
-            func = scrape_website,
-            description = "Only Use this to load content from a website url"
-        ),   
+        # Tool(
+        #     name = "Scrape_website",
+        #     func = scrape_website,
+        #     description = "Only Use this to load content from a website url"
+        # ),   
     ]    
 
     agent = initialize_agent(
