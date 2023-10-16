@@ -4,7 +4,7 @@
 - Relevance.ai for data tables
 - Browse.ai for scraping FAQ github repository
 - Browerless for data automation
-- Replit to activate Agent AI
+- Replit to activate Agent AI: [![Try on repl.it](https://img.shields.io/badge/Replit-DD1200?style=for-the-badge&logo=Replit&logoColor=white)](https://repl.it/github/mishalhossin/Discord-AI-Chatbot)
 
 # Goal
 - Provide a simply way for token holders to interact and receive responses for the token registration and redemption process
