@@ -212,7 +212,7 @@ def trigger_github_weekly_trending_repo_scrape():
     url = "https://api.browse.ai/v2/robots/72a7819a-8192-4f57-af6d-16620c6b2d44/tasks"
 
     payload = {"inputParameters": 
-               {"originUrl": "https://github.com/trending"}
+               {"originUrl": "https://github.com/hei2023/faq/blob/main/README.md"}
             }
     headers = {"Authorization": "Bearer 45a64b82-b413-449a-834d-5dcb77a09eea:2e1f963e-c248-441c-aa05-ddcefd281deb"}
 
