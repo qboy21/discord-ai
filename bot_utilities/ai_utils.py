@@ -254,20 +254,6 @@ def filter_ai_github_repos(repos):
     prompt_template = """
     {repos} 
     Above is the list of scraped trending github repos this week, 
-    can you help me filter out ones that is related to AI, knowledge graph, computer vision, large language model?
-
-    The report should be in certain format:
-    "🚀 Daily trending AI projects:
-
-    **coqui-ai / TTS**
-    - 🌟 3,952 stars this week | 18,952 total stars
-    - 📖 a deep learning toolkit for Text-to-Speech, battle-tested in research and production
-    - 🌐 https://github.com/coqui-ai/TTS
-
-    **tldraw / tldraw**
-    - 🌟 2,196 stars this week | 20,812 total stars
-    - 📖 a very good whiteboard
-    - 🌐 https://github.com/yoheinakajima/instagraph
 
     ...."
 
@@ -311,7 +297,7 @@ def create_agent(id, user_name, ai_name, instructions):
         Tool(
             name = "research",
             func = research,
-            description = "Always use this to answer questions about current events, data, or terms that you don't really understand. You should ask targeted questions"
+            description = "Always use this to answer questions about redemption, registration, tokens, current events, data, or terms that you don't really understand. You should ask targeted questions"
         ),           
         Tool(
             name = "Scrape_website",
