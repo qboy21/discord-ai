@@ -1,4 +1,4 @@
-# The Discord AI Chatbot uses a Research Agent
+# The Discord AI Chatbot utilizing a Research Agent
 - Uses the Discord AI Chatbot base code only credited to mishalhossin (https://github.com/mishalhossin/Discord-AI-Chatbot) for connectivity
 - Modified to accesss a specific knowledge base as well as online searches rather than user message history
 - Relevance.ai for data tables
